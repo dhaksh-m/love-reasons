@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useMemo, useState } from "react";
 import reasons from "./reasons";
 import LoveLetter from "./LoveLetter";
-import MusicPlayer from "./MusicPlayer";
+
 
 export default function PolaroidStack({
   audioRef,
@@ -28,9 +28,6 @@ export default function PolaroidStack({
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#fce7f3] via-[#f3e8ff] to-[#fae8ff]">
-
-      {/* Music */}
-      <MusicPlayer />
 
       {/* Background Texture */}
       <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')]" />

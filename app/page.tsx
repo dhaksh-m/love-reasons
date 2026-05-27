@@ -20,18 +20,13 @@ export default function Home() {
 
       setStarted(true);
     } catch (err) {
-      console.error("audio failed:", err);
+      console.error(err);
     }
   };
 
-  if (started) {
-    return <PolaroidStack audioRef={audioRef} />;
-  }
-
   return (
-    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-pink-200 via-rose-100 to-purple-200 px-6">
-
-      {/* Audio */}
+    <>
+      {/* KEEP AUDIO OUTSIDE CONDITIONAL */}
       <audio
         ref={audioRef}
         src="/music/love-song.mp3"
@@ -39,33 +34,40 @@ export default function Home() {
         preload="auto"
       />
 
-      {/* Glow */}
-      <div className="absolute top-[-120px] left-[-120px] h-[320px] w-[320px] rounded-full bg-pink-300 opacity-30 blur-3xl" />
+      {!started ? (
+        <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-pink-200 via-rose-100 to-purple-200 px-6">
 
-      <div className="absolute bottom-[-120px] right-[-120px] h-[320px] w-[320px] rounded-full bg-purple-300 opacity-30 blur-3xl" />
+          {/* Glow */}
+          <div className="absolute top-[-120px] left-[-120px] h-[320px] w-[320px] rounded-full bg-pink-300 opacity-30 blur-3xl" />
 
-      {/* Card */}
-      <div className="relative z-10 w-full max-w-2xl rounded-[40px] border border-white/40 bg-white/30 p-10 text-center shadow-2xl backdrop-blur-xl">
+          <div className="absolute bottom-[-120px] right-[-120px] h-[320px] w-[320px] rounded-full bg-purple-300 opacity-30 blur-3xl" />
 
-        <h1 className="mb-6 text-5xl font-bold leading-tight text-rose-600 md:text-7xl">
-          Hey Love...
-          <br />
-          do you wanna know
-          <br />
-          why I love you?
-        </h1>
+          {/* Card */}
+          <div className="relative z-10 w-full max-w-2xl rounded-[40px] border border-white/40 bg-white/30 p-10 text-center shadow-2xl backdrop-blur-xl">
 
-        <p className="mb-10 text-lg text-rose-500">
-          I tried putting it into words...
-        </p>
+            <h1 className="mb-6 text-5xl font-bold leading-tight text-rose-600 md:text-7xl">
+              Hey Love...
+              <br />
+              do you wanna know
+              <br />
+              why I love you?
+            </h1>
 
-        <button
-          onClick={handleStart}
-          className="rounded-full bg-gradient-to-r from-pink-500 to-rose-400 px-10 py-4 text-lg font-semibold text-white shadow-xl transition-all duration-300 hover:scale-105"
-        >
-          find out ♡
-        </button>
-      </div>
-    </main>
+            <p className="mb-10 text-lg text-rose-500">
+              I tried putting it into words...
+            </p>
+
+            <button
+              onClick={handleStart}
+              className="rounded-full bg-gradient-to-r from-pink-500 to-rose-400 px-10 py-4 text-lg font-semibold text-white shadow-xl transition-all duration-300 hover:scale-105"
+            >
+              find out ♡
+            </button>
+          </div>
+        </main>
+      ) : (
+        <PolaroidStack audioRef={audioRef} />
+      )}
+    </>
   );
 }
